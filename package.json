@@ -1,0 +1,15 @@
+{
+  "name": "todoapp_lit-html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "polymer serve --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lit-html": "^1.1.2"
+  }
+}
