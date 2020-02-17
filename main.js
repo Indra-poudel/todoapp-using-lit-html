@@ -48,7 +48,7 @@ class todoApp extends HTMLElement{
       }
 
     update() {
-      
+    
         render(this.template(), this.shadowRoot, {eventContext: this});
         
     }
@@ -61,7 +61,7 @@ class todoApp extends HTMLElement{
         <todo-header @click=${this.clickHandler}></todo-header>
         <todo-input .changeHandler=${this.inputhandler} ></todo-input>
         ${this.tasks.map((item,index) => {
-           return html` <todo-list .iscompleted=${item.completed} .todotask=${item.title}  .id=${item.id} .toggle=${this.checkboxhandler} ></todo-list>
+           return html` <todo-list toggle=${item.completed} .iscompleted=${item.completed} .todotask=${item.title}  .id=${item.id} .toggle=${this.checkboxhandler} ></todo-list>
         `})}
         `;
       }
@@ -71,9 +71,6 @@ class todoApp extends HTMLElement{
     
     checkboxhandler(e)
     {
-
-
-     // this.tasks[e.target.id-1].completed= !this.tasks[e.target.id-1].completed;
       
     const completed = !this.tasks[e.target.id-1].completed;
       const item = { ...this.tasks[e.target.id - 1], completed};
@@ -81,33 +78,8 @@ class todoApp extends HTMLElement{
     todos[e.target.id-1]=item;
     this.tasks=[...todos];
     this.tasks=[...this.tasks];
-    console.log(this.tasks);
-
-
-
-      // const todos = this.tasks.map((todo,index)=>{
-      //   if(index === e.target.id - 1){
-      //     todo = {...todo,completed: !todo.completed};
-      //     return todo;
-      //   }
-      //   return todo;
-      // });
-      // this.tasks= [ todos];
-
-      // this.tasks = {...this.tasks,
-      //   todos:[
-      //     {
-      //       id:1,
-      //       title:'Go To Gym',
-      //       completed :true
-      //     }
-      //   ]
-
-      // }
-   
+      console.log("checkbox",this.tasks[e.target.id-1].completed);
       this.update();
-
-
     }
 
     inputhandler(e)
@@ -124,7 +96,6 @@ class todoApp extends HTMLElement{
         this.tasks= [...this.tasks,newtask];
 
        this.update();
-       
       }
     }
 }

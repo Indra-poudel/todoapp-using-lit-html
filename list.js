@@ -8,22 +8,18 @@ class list extends HTMLElement{
         this.attachShadow({mode: 'open'});
           
     }
+    static get observedAttributes() { return ['toggle']; }
 
-    static get observedAttributes()
-    {
-      return['iscompleted'];
+    attributeChangedCallback(name, oldValue, newValue) {
+    
+      this.update();
     }
-
     connectedCallback() {
         this.update();
       }
 
-      attributesChangedCallback(name, oldV, newV)
-      {
-        console.log(name, oldV, newV);
-        this.update();
-      }
     update() {
+      
         render(this.template(), this.shadowRoot, {eventContext: this});
        
       }
@@ -32,8 +28,7 @@ class list extends HTMLElement{
   
 
     template() {
-      console.log("fjadsk");
-      console.log(this.todotask);
+      console.log("inside list",this.iscompleted);
         return html`
         <style>
         .completed{
@@ -60,10 +55,12 @@ class list extends HTMLElement{
         li:hover {background-color: #ddd;}
         </style>
         <ul> 
-        ${this.tasks.map((item,index) => {
-           return html` <todo-list iscompleted=${item.completed} .todotask=${item.title}  .id=${item.id} .toggle=${this.checkboxhandler} ></todo-list>
-        `})}
-    
+    <li>
+    <input @change=${this.toggle} id=${this.id} type="checkbox" name="select" ?checked=${this.iscompleted}>
+        <span class=${this.iscompleted?'completed':'uncompleted'} >
+          ${this.todotask}
+        </span>
+        </li> 
       </ul>
         `;
 
